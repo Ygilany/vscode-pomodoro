@@ -3,6 +3,7 @@ const SECONDS_IN_MINUTE: number = 60;
 const MILLISECONDS_IN_SECOND : number = 1000;
 
 export enum TimeUnits {
+  Milliseconds = 1,
   Second = MILLISECONDS_IN_SECOND,
   Minute = SECONDS_IN_MINUTE * MILLISECONDS_IN_SECOND,
   Hour = MINUTES_IN_HOUR * SECONDS_IN_MINUTE * MILLISECONDS_IN_SECOND
