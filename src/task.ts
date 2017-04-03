@@ -1,6 +1,9 @@
+import { TimeUnits, Timer } from './timer';
+import { getConfig } from './config';
+
 export class Task {
   public name: string;
-  public startTime: Date;
+  private startTime: Date;
   public isCompleted: boolean;
 
   constructor(_name: string) {
@@ -16,7 +19,11 @@ export class Task {
     this.name = newName;
   }
 
-  public startTask() {
+  public startTask() : Timer {
+    let _timer = new Timer(getConfig().task_duration, TimeUnits.Milliseconds);
+    _timer.start();
     this.startTime = new Date();
+    return _timer;
+
   }
 }
