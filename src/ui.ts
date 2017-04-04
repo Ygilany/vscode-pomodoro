@@ -45,7 +45,7 @@ export class StatusBar {
   }
 
   public updateCurrentTask(name: string) {
-    StatusBar.taskStatusBar.text = `${name}`
+    StatusBar.taskStatusBar.text = `FOCUS: ${name}`
   }
 
   public msToTime(s) {
