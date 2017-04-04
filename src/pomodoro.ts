@@ -3,11 +3,15 @@ import { Task } from './task';
 import { TimeUnits, Timer } from './timer';
 import { getConfig } from './config';
 import { InputPrompt, StatusBar } from './ui';
+import { TaskStorage } from './storage';
+
 
 export class Pomodoro {
 	private static _instance: Pomodoro;
 
 	private _statusBars: StatusBar = StatusBar.getInstance();
+
+	private _storage: TaskStorage;
 
 	public tasks: Task[];
 	public completedTasksCounter: number;
@@ -18,9 +22,10 @@ export class Pomodoro {
 	private _timer: Timer;
 
 	private constructor() {
-		this.tasks = [];
+		this.tasks = [] as Task[];
 		this.completedTasksCounter = 0;
 		this.breakCounter = 0;
+		this._storage = new TaskStorage(getConfig().tasks_file);
 	}
 
 	public static getInstance(): Pomodoro {		
@@ -30,10 +35,20 @@ export class Pomodoro {
 		return Pomodoro._instance;
 	}
 
+	public preload() {
+		this._storage.load();
+	}
+
 	public async addTask() {
 		const pomodoro = Pomodoro.getInstance();
 		const newTask: string = await InputPrompt(`Add a new task to the Pomodoro`, `task name`);
-		pomodoro.tasks.push(new Task(newTask));
+		console.log(newTask);
+		console.log(pomodoro);
+		console.log(pomodoro.tasks.length);
+		
+		
+		pomodoro.tasks.push(new Task(newTask, null));
+		this._storage.save();
 		this._statusBars.updateTasksCounter(pomodoro.currentTaskIndex, pomodoro.tasks.length)
 	}
 
