@@ -55,7 +55,7 @@ export class Pomodoro {
 				}
 			}
 		}
-		
+		this._statusBars.updateCurrentTask(pomodoro.tasks[pomodoro.currentTaskIndex].name)
 	}
 
 	private takeBreak(): void {
