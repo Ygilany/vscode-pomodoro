@@ -23,21 +23,13 @@ export class Pomodoro {
     this.tasks.push(new Task(name));
   }
 
-  public start() {
+  public run() {
     this.pickTask();
 
     this.isRunning = true;
 
     while(this.isRunning) {
-      this._timer = this.tasks[this.currentTaskIndex].startTask();
-      // prompt user to assess the status of the task that was running
-      if (this.breakCounter <= getConfig().counter_to_long_break) {
-        this._timer = new Timer(getConfig().break_duration, TimeUnits.Milliseconds); 
-        this.breakCounter++;
-      } else {
-        this._timer = new Timer(getConfig().long_break_duration, TimeUnits.Milliseconds); 
-        this.breakCounter = 0;
-      }
+      this._timer = this.tasks[this.currentTaskIndex].startTask(this.takeBreak);
     }
   }
 
@@ -51,6 +43,18 @@ export class Pomodoro {
         }
       }
     }
+  }
+
+  private takeBreak(): void {
+    // prompt user to assess the status of the task that was running
+    if (this.breakCounter <= getConfig().counter_to_long_break) {
+      this._timer = new Timer(getConfig().break_duration, TimeUnits.Milliseconds); 
+      this.breakCounter++;
+    } else {
+      this._timer = new Timer(getConfig().long_break_duration, TimeUnits.Milliseconds); 
+      this.breakCounter = 0;
+    }
+    this._timer.start();
   }
 
 }
