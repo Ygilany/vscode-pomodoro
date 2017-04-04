@@ -3,58 +3,64 @@ import { TimeUnits, Timer } from './timer';
 import { getConfig } from './config';
 
 export class Pomodoro {
-  public tasks: Task[];
-  public completedTasksCounter: number;
-  public currentTaskIndex: number;
-  
-  private breakCounter: number;
+	private static _instance: Pomodoro;
 
-  private isRunning: boolean = false;
+	public tasks: Task[];
+	public completedTasksCounter: number;
+	public currentTaskIndex: number;
 
-  private _timer: Timer;
+	private breakCounter: number;
 
-  constructor() {
-    this.tasks = [];
-    this.completedTasksCounter = 0;
-    this.breakCounter = 0;
-  }
+	private _timer: Timer;
 
-  public addTask(name: string) {
-    this.tasks.push(new Task(name));
-  }
+	private constructor() {
+		this.tasks = [];
+		this.completedTasksCounter = 0;
+		this.breakCounter = 0;
+	}
 
-  public run() {
-    this.pickTask();
+	public static getInstance(): Pomodoro {		
+		if (Pomodoro._instance === null || Pomodoro._instance === undefined) {
+			Pomodoro._instance =  new Pomodoro();
+		}
+		return Pomodoro._instance;
+	}
 
-    this.isRunning = true;
+	public addTask(name: string) {
+		const instance = Pomodoro.getInstance();
+		instance.tasks.push(new Task(name));
+	}
 
-    while(this.isRunning) {
-      this._timer = this.tasks[this.currentTaskIndex].startTask(this.takeBreak);
-    }
-  }
+	public run() {
+		const instance = Pomodoro.getInstance();
+		instance.pickTask();
+		
+		instance._timer = instance.tasks[instance.currentTaskIndex].startTask(instance.takeBreak);
+	}
 
-  private pickTask(): void {
-    if(this.tasks.length > 0) {
-      if (this.currentTaskIndex !== undefined) {
-        this.currentTaskIndex = 0;
-      } else {
-        if (this.tasks[this.currentTaskIndex].isCompleted) {
-          this.currentTaskIndex += 1;
-        }
-      }
-    }
-  }
+	private pickTask(): void {
+		const instance = Pomodoro.getInstance();
+		if (instance.tasks.length > 0) {
+			if (instance.currentTaskIndex === undefined) {
+				instance.currentTaskIndex = 0;
+			} else {
+				if (instance.tasks[instance.currentTaskIndex].isCompleted) {
+					instance.currentTaskIndex += 1;
+				}
+			}
+		}
+	}
 
-  private takeBreak(): void {
-    // prompt user to assess the status of the task that was running
-    if (this.breakCounter <= getConfig().counter_to_long_break) {
-      this._timer = new Timer(getConfig().break_duration, TimeUnits.Milliseconds); 
-      this.breakCounter++;
-    } else {
-      this._timer = new Timer(getConfig().long_break_duration, TimeUnits.Milliseconds); 
-      this.breakCounter = 0;
-    }
-    this._timer.start();
-  }
-
+	private takeBreak(): void {
+		const instance = Pomodoro.getInstance();
+		// prompt user to assess the status of the task that was running
+		if (instance.breakCounter <= getConfig().counter_to_long_break) {
+			instance._timer = new Timer(getConfig().break_duration, TimeUnits.Milliseconds);
+			instance.breakCounter++;
+		} else {
+			instance._timer = new Timer(getConfig().long_break_duration, TimeUnits.Milliseconds);
+			instance.breakCounter = 0;
+		}
+		instance._timer.start(instance.run);
+	}
 }
