@@ -6,19 +6,26 @@ export class StatusBar {
   private static timerStatusBar: vscode.StatusBarItem;
   private static tasksCounterStatusBar: vscode.StatusBarItem;
   private static taskStatusBar: vscode.StatusBarItem;
+  private static startStatusBar: vscode.StatusBarItem;
 
   private constructor() {
-    StatusBar.timerStatusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 0);
-    StatusBar.tasksCounterStatusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 0);
-    StatusBar.taskStatusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 0);
+    StatusBar.timerStatusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 3);
+    StatusBar.tasksCounterStatusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 2);
+    StatusBar.taskStatusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 1);
+    StatusBar.startStatusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 4);
 
-    StatusBar.timerStatusBar.text = `00:00`;
+    StatusBar.timerStatusBar.text = `$(watch) 00:00`;
     StatusBar.taskStatusBar.text = `nothing is currently running`;
-    StatusBar.tasksCounterStatusBar.text = `(0/0)`
+    StatusBar.tasksCounterStatusBar.text = `(0/0)`;
+    StatusBar.startStatusBar.text = `$(triangle-right)`;
+    StatusBar.startStatusBar.color = 'lightgreen';
+    StatusBar.startStatusBar.tooltip = 'start';
+    StatusBar.startStatusBar.command = 'pomodoro.run';
 
     StatusBar.timerStatusBar.show();
     StatusBar.tasksCounterStatusBar.show();
     StatusBar.taskStatusBar.show();
+    StatusBar.startStatusBar.show();
 
   }
 
@@ -29,17 +36,28 @@ export class StatusBar {
     return StatusBar._instance;
   }
 
-  public updateTasksCounter(currentTask: number, totalTasks: number) {
+  public updateTasksCounter(currentTask: number = 0, totalTasks: number) {
     StatusBar.tasksCounterStatusBar.text = `(${currentTask}/${totalTasks})`
   }
 
-  public updateTimerBar() {
-    StatusBar.timerStatusBar.text = `Timer`
+  public updateTimerBar(timerText) {
+    StatusBar.timerStatusBar.text = `$(watch) ${this.msToTime(timerText)}`
   }
 
   public updateCurrentTask(name: string) {
     StatusBar.taskStatusBar.text = `${name}`
   }
+
+  public msToTime(s) {
+    let ms = s % 1000;
+    s = (s - ms) / 1000;
+    let secs = s % 60;
+    s = (s - secs) / 60;
+    let mins = s % 60;
+    let hrs = (s - mins) / 60;
+
+  return hrs + ':' + mins + ':' + secs;
+}
 
   public dispose() {
     StatusBar.timerStatusBar.dispose();
