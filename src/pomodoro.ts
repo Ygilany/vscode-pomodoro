@@ -36,19 +36,29 @@ export class Pomodoro {
 	}
 
 	public preload() {
+		const pomodoro = Pomodoro.getInstance();
 		this._storage.load();
+
+		for (let taskIndex in pomodoro.tasks) {			
+			if (pomodoro.tasks[taskIndex].startTime === `1970-01-01T00:00:00.000Z`) {				
+				break;
+			} else {				
+				if (pomodoro.tasks[taskIndex].isCompleted) {
+					pomodoro.completedTasksCounter ++;
+				} else {
+					pomodoro.currentTaskIndex = parseInt(taskIndex);
+				}
+			}
+		}
 	}
 
 	public async addTask() {
 		const pomodoro = Pomodoro.getInstance();
 		const newTask: string = await InputPrompt(`Add a new task to the Pomodoro`, `task name`);
-		console.log(newTask);
-		console.log(pomodoro);
-		console.log(pomodoro.tasks.length);
-		
-		
+
 		pomodoro.tasks.push(new Task(newTask, null));
 		this._storage.save();
+
 		this._statusBars.updateTasksCounter(pomodoro.currentTaskIndex, pomodoro.tasks.length)
 	}
 
@@ -57,6 +67,7 @@ export class Pomodoro {
 		pomodoro.pickTask();
 		
 		pomodoro._timer = pomodoro.tasks[pomodoro.currentTaskIndex].startTask(pomodoro.takeBreak);
+		this._storage.save();		
 	}
 
 	private pickTask(): void {
