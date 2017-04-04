@@ -20,14 +20,15 @@ export class Timer {
 
   }
 
-  public start () {
+  public start (next?: Function) {
     if (!this.isRunning){
       this.isRunning = true;
       this._timer = setInterval(()=> {
         this.tick();
+        if(this.countdownMilliseconds <= 0) {
+          next();
+        }
       }, TimeUnits.Second);
-    } else {
-      throw `Timer is already running`;
     }
   }
 

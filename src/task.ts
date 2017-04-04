@@ -19,11 +19,10 @@ export class Task {
     this.name = newName;
   }
 
-  public startTask() : Timer {
+  public startTask(next: Function) : Timer {
     let _timer = new Timer(getConfig().task_duration, TimeUnits.Milliseconds);
-    _timer.start();
+    _timer.start(next);
     this.startTime = new Date();
     return _timer;
-
   }
 }
