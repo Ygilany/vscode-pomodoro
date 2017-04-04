@@ -3,11 +3,12 @@ import { getConfig } from './config';
 
 export class Task {
   public name: string;
-  private startTime: Date;
+  public startTime: Date;
   public isCompleted: boolean;
 
-  constructor(_name: string) {
+  constructor(_name: string, _startTime: string) {
     this.name = _name;
+    this.startTime = new Date(_startTime);
     this.isCompleted = false;
   }
 
