@@ -1,9 +1,13 @@
+import * as vscode from 'vscode';
 import { Task } from './task';
 import { TimeUnits, Timer } from './timer';
 import { getConfig } from './config';
+import { InputPrompt, StatusBar } from './ui';
 
 export class Pomodoro {
 	private static _instance: Pomodoro;
+
+	private _statusBars: StatusBar = StatusBar.getInstance();
 
 	public tasks: Task[];
 	public completedTasksCounter: number;
@@ -26,9 +30,11 @@ export class Pomodoro {
 		return Pomodoro._instance;
 	}
 
-	public addTask(name: string) {
+	public async addTask() {
 		const pomodoro = Pomodoro.getInstance();
-		pomodoro.tasks.push(new Task(name));
+		const newTask: string = await InputPrompt(`Add a new task to the Pomodoro`, `task name`);
+		pomodoro.tasks.push(new Task(newTask));
+		this._statusBars.updateTasksCounter(pomodoro.currentTaskIndex, pomodoro.tasks.length)
 	}
 
 	public run() {
@@ -49,6 +55,7 @@ export class Pomodoro {
 				}
 			}
 		}
+		
 	}
 
 	private takeBreak(): void {
