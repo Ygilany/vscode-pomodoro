@@ -47,9 +47,7 @@ export class Timer {
     }
   }
 
-  public tick() {
-    console.log(this.countdownMilliseconds);
-    
+  public tick() {    
     this.countdownMilliseconds -= TimeUnits.Second;
   }
 }
