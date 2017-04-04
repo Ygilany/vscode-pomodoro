@@ -3,13 +3,13 @@ import { getConfig } from './config';
 
 export class Task {
   public name: string;
-  public startTime: Date;
+  public startTime: string;
   public isCompleted: boolean;
 
-  constructor(_name: string, _startTime: string) {
+  constructor(_name: string, _startTime: string, _isCompleted: boolean = false) {
     this.name = _name;
-    this.startTime = new Date(_startTime);
-    this.isCompleted = false;
+    this.startTime = _startTime;
+    this.isCompleted = _isCompleted;
   }
 
   public CompleteTask() {
@@ -21,9 +21,17 @@ export class Task {
   }
 
   public startTask(next: Function) : Timer {
-    let _timer = new Timer(getConfig().task_duration, TimeUnits.Milliseconds);
+    let duration = getConfig().task_duration;
+    if (this.startTime !== `1970-01-01T00:00:00.000Z`){ // already started
+      let difference = new Date().getTime() - new Date(this.startTime).getTime();
+      duration = getConfig().task_duration - difference
+    } else {
+      this.startTime = `${new Date()}`;
+    }
+
+    let _timer = new Timer(duration, TimeUnits.Milliseconds);
     _timer.start(next);
-    this.startTime = new Date();
+    
     return _timer;
   }
 }
