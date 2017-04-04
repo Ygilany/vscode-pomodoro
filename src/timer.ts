@@ -2,6 +2,8 @@ const MINUTES_IN_HOUR: number = 60;
 const SECONDS_IN_MINUTE: number = 60;
 const MILLISECONDS_IN_SECOND : number = 1000;
 
+import { StatusBar } from './ui';
+
 export enum TimeUnits {
   Milliseconds = 1,
   Second = MILLISECONDS_IN_SECOND,
@@ -21,10 +23,12 @@ export class Timer {
   }
 
   public start (next: Function) {
+    const statusBars = StatusBar.getInstance();
     if (!this.isRunning){
       this.isRunning = true;
       this._timer = setInterval(()=> {
         this.tick();
+        statusBars.updateTimerBar(this.countdownMilliseconds);
         if(this.countdownMilliseconds <= 0) {
           this.stop()
           next();
