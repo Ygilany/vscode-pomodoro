@@ -50,6 +50,10 @@ export class Pomodoro {
 				}
 			}
 		}
+
+		if (pomodoro.tasks[pomodoro.currentTaskIndex].startTime !== `1970-01-01T00:00:00.000Z`) {
+			pomodoro.run();
+		}
 	}
 
 	public async addTask() {
