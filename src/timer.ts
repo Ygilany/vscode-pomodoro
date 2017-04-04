@@ -20,7 +20,7 @@ export class Timer {
 
   }
 
-  public start (next?: Function) {
+  public start (next: Function) {
     if (!this.isRunning){
       this.isRunning = true;
       this._timer = setInterval(()=> {
@@ -47,6 +47,8 @@ export class Timer {
   }
 
   public tick() {
+    console.log(this.countdownMilliseconds);
+    
     this.countdownMilliseconds -= TimeUnits.Second;
   }
 }
