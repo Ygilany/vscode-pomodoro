@@ -27,40 +27,40 @@ export class Pomodoro {
 	}
 
 	public addTask(name: string) {
-		const instance = Pomodoro.getInstance();
-		instance.tasks.push(new Task(name));
+		const pomodoro = Pomodoro.getInstance();
+		pomodoro.tasks.push(new Task(name));
 	}
 
 	public run() {
-		const instance = Pomodoro.getInstance();
-		instance.pickTask();
+		const pomodoro = Pomodoro.getInstance();
+		pomodoro.pickTask();
 		
-		instance._timer = instance.tasks[instance.currentTaskIndex].startTask(instance.takeBreak);
+		pomodoro._timer = pomodoro.tasks[pomodoro.currentTaskIndex].startTask(pomodoro.takeBreak);
 	}
 
 	private pickTask(): void {
-		const instance = Pomodoro.getInstance();
-		if (instance.tasks.length > 0) {
-			if (instance.currentTaskIndex === undefined) {
-				instance.currentTaskIndex = 0;
+		const pomodoro = Pomodoro.getInstance();
+		if (pomodoro.tasks.length > 0) {
+			if (pomodoro.currentTaskIndex === undefined) {
+				pomodoro.currentTaskIndex = 0;
 			} else {
-				if (instance.tasks[instance.currentTaskIndex].isCompleted) {
-					instance.currentTaskIndex += 1;
+				if (pomodoro.tasks[pomodoro.currentTaskIndex].isCompleted) {
+					pomodoro.currentTaskIndex += 1;
 				}
 			}
 		}
 	}
 
 	private takeBreak(): void {
-		const instance = Pomodoro.getInstance();
+		const pomodoro = Pomodoro.getInstance();
 		// prompt user to assess the status of the task that was running
-		if (instance.breakCounter <= getConfig().counter_to_long_break) {
-			instance._timer = new Timer(getConfig().break_duration, TimeUnits.Milliseconds);
-			instance.breakCounter++;
+		if (pomodoro.breakCounter <= getConfig().counter_to_long_break) {
+			pomodoro._timer = new Timer(getConfig().break_duration, TimeUnits.Milliseconds);
+			pomodoro.breakCounter++;
 		} else {
-			instance._timer = new Timer(getConfig().long_break_duration, TimeUnits.Milliseconds);
-			instance.breakCounter = 0;
+			pomodoro._timer = new Timer(getConfig().long_break_duration, TimeUnits.Milliseconds);
+			pomodoro.breakCounter = 0;
 		}
-		instance._timer.start(instance.run);
+		pomodoro._timer.start(pomodoro.run);
 	}
 }
