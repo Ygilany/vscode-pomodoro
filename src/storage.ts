@@ -1,54 +1,40 @@
-// import fs = require('fs');
-// import { Task } from './task';
-// import { Pomodoro } from './pomodoro';
+import fs = require('fs');
+import { Task } from './task';
+import { Pomodoro } from './pomodoro';
 
-// export interface TaskList extends Pomodoro {};
+export class TaskStorage {
+  private filename: string;
+  private _pomodoro: Pomodoro;
 
+  constructor(_filename: string) {
+    this.filename = _filename;
+  }
 
-// export class TaskStorage {
-//   private static _instance: TaskStorage;
-//   private static filename: string;
+  public save(): void {
+    if (this._pomodoro === undefined) {
+      this._pomodoro = Pomodoro.getInstance();
+    }
+    fs.writeFileSync(this.filename, JSON.stringify(this._pomodoro.tasks, null, "\t"));
+  }
 
-//   private constructor() {
-//   }
+  public load(): void {
+    let tasks: Task[] = [];
 
-//   public getInstance() {
-//     if (TaskStorage._instance === undefined) {
-//       TaskStorage._instance = new TaskStorage();
-//     }
-//   }
+    if (this._pomodoro === undefined) {
+      this._pomodoro = Pomodoro.getInstance();
+    }
 
-//   // public load(): string {
-//   //   let items = [];
+    if (!fs.existsSync(this.filename)) {
+      this._pomodoro.tasks = tasks
+    }
 
-//   //   // missing file (new install)
-//   //   if (!fs.existsSync(this.filename)) {
-//   //     this.taskList = items as TaskList;
-//   //     return "";
-//   //   }
+    try {
+      tasks = JSON.parse(fs.readFileSync(this.filename).toString());
+      this._pomodoro.tasks = tasks;
 
-//   //   try {
-//   //     items = JSON.parse(fs.readFileSync(this.filename).toString());
-//   //     this.taskList = items as TaskList;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-//   //     return "";
-//   //   } catch (error) {
-//   //     return error.toString();
-//   //   }
-//   // }
-
-//   // public reload() {
-//   //   const items = [];
-
-//   //   // missing file (new install)
-//   //   if (!fs.existsSync(this.filename)) {
-//   //     this.taskList = items as TaskList;
-//   //   } else {
-//   //     this.load();
-//   //   }
-//   // }
-
-//   public static save(_taskList: TaskList) {
-//     fs.writeFileSync(this.filename, JSON.stringify(_taskList, null, "\t"));
-//   }
-// }
+}
