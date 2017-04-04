@@ -12,14 +12,20 @@
     ],
     "activationEvents": [
         "*",
-        "onCommand:pomodoro.addTask"
+        "onCommand:pomodoro.addTask",
+        "onCommand:pomodoro.run"
     ],
     "main": "./out/src/extension",
     "contributes": {
-        "commands": [{
-            "command": "pomodoro.addTask",
-            "title": "Pomodoro: Add Task"
-        }]
+        "commands": [
+            {
+                "command": "pomodoro.addTask",
+                "title": "Pomodoro: Add Task"
+            }, {
+                "command": "pomodoro.run",
+                "title": "Pomodoro: Run tasks"
+            }
+        ]
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
