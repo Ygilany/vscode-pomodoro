@@ -26,6 +26,7 @@ export class Timer {
       this._timer = setInterval(()=> {
         this.tick();
         if(this.countdownMilliseconds <= 0) {
+          this.stop()
           next();
         }
       }, TimeUnits.Second);
