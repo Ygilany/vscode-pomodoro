@@ -11,11 +11,15 @@
         "Other"
     ],
     "activationEvents": [
-        "*"
+        "*",
+        "onCommand:pomodoro.addTask"
     ],
     "main": "./out/src/extension",
     "contributes": {
-        "commands": []
+        "commands": [{
+            "command": "pomodoro.addTask",
+            "title": "Pomodoro: Add Task"
+        }]
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
