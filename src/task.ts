@@ -22,7 +22,7 @@ export class Task {
 
   public startTask(next: Function) : Timer {
     let duration = getConfig().task_duration;
-    if (this.startTime !== `1970-01-01T00:00:00.000Z`){ // already started
+    if (this.startTime !== null){ // if the task not already started
       let difference = new Date().getTime() - new Date(this.startTime).getTime();
       duration = getConfig().task_duration - difference
     } else {

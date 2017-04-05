@@ -1,12 +1,7 @@
 [
 	{
-		"name": "test task",
-		"startTime": "2017-01-01T00:00:00.000Z",
-		"isCompleted": true
-	},
-	{
-		"name": "test2",
-		"startTime": "Tue Apr 04 2017 17:20:19 GMT-0400 (EDT)",
+		"name": "test",
+		"startTime": "Tue Apr 04 2017 21:48:00 GMT-0400 (EDT)",
 		"isCompleted": false
 	}
 ]
