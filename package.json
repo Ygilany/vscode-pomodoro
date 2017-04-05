@@ -13,7 +13,8 @@
     "activationEvents": [
         "*",
         "onCommand:pomodoro.addTask",
-        "onCommand:pomodoro.run"
+        "onCommand:pomodoro.run",
+        "onCommand:pomodoro.clear"
     ],
     "main": "./out/src/extension",
     "contributes": {
@@ -24,6 +25,9 @@
             }, {
                 "command": "pomodoro.run",
                 "title": "Pomodoro: Run tasks"
+            }, {
+                "command": "pomodoro.clear",
+                "title": "Pomodoro: Clear Completed Tasks Counter"
             }
         ]
     },
