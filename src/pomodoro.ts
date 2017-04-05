@@ -98,6 +98,7 @@ export class Pomodoro {
 		const response: boolean = await YesNoPrompt(`Did you finish the task?`);
 		if(response) {
 			pomodoro.tasks[pomodoro.currentTaskIndex].CompleteTask();
+			pomodoro._statusBars.updateTasksCounter(pomodoro.completedTasksCounter, pomodoro.tasks.length)
 			pomodoro._storage.save();
 		}
 		pomodoro.takeBreak();
