@@ -36,8 +36,8 @@ export class StatusBar {
     return StatusBar._instance;
   }
 
-  public updateTasksCounter(currentTask: number = 0, totalTasks: number) {
-    StatusBar.tasksCounterStatusBar.text = `(${currentTask}/${totalTasks})`
+  public updateTasksCounter(completedTasks: number = 0, totalTasks: number) {
+    StatusBar.tasksCounterStatusBar.text = `(${completedTasks}/${totalTasks})`
   }
 
   public updateTimerBar(milliseconds) {

@@ -63,7 +63,7 @@ export class Pomodoro {
 		pomodoro.tasks.push(new Task(newTask, null));
 		pomodoro._storage.save();
 
-		pomodoro._statusBars.updateTasksCounter(pomodoro.currentTaskIndex, pomodoro.tasks.length)
+		pomodoro._statusBars.updateTasksCounter(pomodoro.completedTasksCounter, pomodoro.tasks.length)
 	}
 
 	public run() {
