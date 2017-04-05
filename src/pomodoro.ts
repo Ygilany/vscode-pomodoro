@@ -37,7 +37,7 @@ export class Pomodoro {
 
 	public preload() {
 		const pomodoro = Pomodoro.getInstance();
-		this._storage.load();
+		pomodoro._storage.load();
 
 		for (let taskIndex in pomodoro.tasks) {			
 			if (pomodoro.tasks[taskIndex].startTime === `1970-01-01T00:00:00.000Z`) {				
@@ -61,9 +61,9 @@ export class Pomodoro {
 		const newTask: string = await InputPrompt(`Add a new task to the Pomodoro`, `task name`);
 
 		pomodoro.tasks.push(new Task(newTask, null));
-		this._storage.save();
+		pomodoro._storage.save();
 
-		this._statusBars.updateTasksCounter(pomodoro.currentTaskIndex, pomodoro.tasks.length)
+		pomodoro._statusBars.updateTasksCounter(pomodoro.currentTaskIndex, pomodoro.tasks.length)
 	}
 
 	public run() {
@@ -71,7 +71,7 @@ export class Pomodoro {
 		pomodoro.pickTask();
 		
 		pomodoro._timer = pomodoro.tasks[pomodoro.currentTaskIndex].startTask(pomodoro.takeBreak);
-		this._storage.save();		
+		pomodoro._storage.save();		
 	}
 
 	private pickTask(): void {
@@ -85,7 +85,7 @@ export class Pomodoro {
 				}
 			}
 		}
-		this._statusBars.updateCurrentTask(pomodoro.tasks[pomodoro.currentTaskIndex].name)
+		pomodoro._statusBars.updateCurrentTask(pomodoro.tasks[pomodoro.currentTaskIndex].name)
 	}
 
 	private takeBreak(): void {
