@@ -41,23 +41,25 @@ export class StatusBar {
   }
 
   public updateTimerBar(timerText) {
-    StatusBar.timerStatusBar.text = `$(watch) ${this.msToTime(timerText)}`
+    StatusBar.timerStatusBar.text = `$(watch) ${this.convertMS(timerText)}`
   }
 
   public updateCurrentTask(name: string) {
     StatusBar.taskStatusBar.text = `FOCUS: ${name}`
   }
 
-  public msToTime(s) {
-    let ms = s % 1000;
-    s = (s - ms) / 1000;
-    let secs = s % 60;
-    s = (s - secs) / 60;
-    let mins = s % 60;
-    let hrs = (s - mins) / 60;
+public convertMS(ms): string {
 
-  return hrs + ':' + mins + ':' + secs;
-}
+  function pad(number) {
+    return ('00' + number).slice(-2);
+  }
+  var mins, secs;
+  secs = Math.floor(ms / 1000);
+  mins = Math.floor(secs / 60);
+  secs = secs % 60;
+
+  return  pad(mins) + ':' + pad(secs);
+};
 
   public dispose() {
     StatusBar.timerStatusBar.dispose();
@@ -66,7 +68,7 @@ export class StatusBar {
   }
 }
 
-export async function YesNoPrompt(): Promise<boolean> {
+export async function YesNoPrompt(prompt: string): Promise<boolean> {
   const optionYes = {
     title: "Yes"
   } as vscode.MessageItem;
@@ -75,7 +77,7 @@ export async function YesNoPrompt(): Promise<boolean> {
   } as vscode.MessageItem;
 
   const selection = await vscode.window.showInformationMessage(
-    `command is successfully added, do you need to add More?`,
+    prompt,
     optionYes, optionNo
   );
 
