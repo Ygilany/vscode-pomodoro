@@ -1,6 +1,7 @@
 {
     "name": "vscode-pomodoro",
     "displayName": "vscode-pomodoro",
+    "icon": "./images/icon.png",
     "description": "pomodoro for developers",
     "version": "0.0.1",
     "publisher": "yahya-gilany",
