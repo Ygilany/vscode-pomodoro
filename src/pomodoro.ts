@@ -69,9 +69,15 @@ export class Pomodoro {
 	public run() {
 		const pomodoro = Pomodoro.getInstance();
 		pomodoro.pickTask();
+		if (pomodoro.currentTaskIndex < pomodoro.tasks.length) {
+			pomodoro._statusBars.updateCurrentTask(`Focus: `+pomodoro.tasks[pomodoro.currentTaskIndex].name)
 		
-		pomodoro._timer = pomodoro.tasks[pomodoro.currentTaskIndex].startTask(pomodoro.askAboutTaskCompletion);
-		pomodoro._storage.save();		
+			pomodoro._timer = pomodoro.tasks[pomodoro.currentTaskIndex].startTask(pomodoro.askAboutTaskCompletion);
+			pomodoro._storage.save();	
+		} else {
+			return;
+		}
+			
 	}
 
 	private pickTask(): void {
@@ -85,7 +91,6 @@ export class Pomodoro {
 				}
 			}
 		}
-		pomodoro._statusBars.updateCurrentTask(pomodoro.tasks[pomodoro.currentTaskIndex].name)
 	}
 
 	private async askAboutTaskCompletion() {
