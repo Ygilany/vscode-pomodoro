@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import { Task } from './task';
 import { TimeUnits, Timer } from './timer';
 import { getConfig } from './config';
-import { InputPrompt, StatusBar } from './ui';
+import { YesNoPrompt, InputPrompt, StatusBar } from './ui';
 import { TaskStorage } from './storage';
 
 
@@ -40,7 +40,7 @@ export class Pomodoro {
 		pomodoro._storage.load();
 
 		for (let taskIndex in pomodoro.tasks) {			
-			if (pomodoro.tasks[taskIndex].startTime === `1970-01-01T00:00:00.000Z`) {				
+			if (pomodoro.tasks[taskIndex].startTime === null) {				
 				break;
 			} else {				
 				if (pomodoro.tasks[taskIndex].isCompleted) {
@@ -50,8 +50,8 @@ export class Pomodoro {
 				}
 			}
 		}
-
-		if (pomodoro.tasks[pomodoro.currentTaskIndex].startTime !== `1970-01-01T00:00:00.000Z`) {
+		
+		if (pomodoro.currentTaskIndex !== undefined && pomodoro.tasks[pomodoro.currentTaskIndex].startTime !== null) {
 			pomodoro.run();
 		}
 	}
@@ -70,7 +70,7 @@ export class Pomodoro {
 		const pomodoro = Pomodoro.getInstance();
 		pomodoro.pickTask();
 		
-		pomodoro._timer = pomodoro.tasks[pomodoro.currentTaskIndex].startTask(pomodoro.takeBreak);
+		pomodoro._timer = pomodoro.tasks[pomodoro.currentTaskIndex].startTask(pomodoro.askAboutTaskCompletion);
 		pomodoro._storage.save();		
 	}
 
@@ -88,6 +88,16 @@ export class Pomodoro {
 		pomodoro._statusBars.updateCurrentTask(pomodoro.tasks[pomodoro.currentTaskIndex].name)
 	}
 
+	private async askAboutTaskCompletion() {
+		const pomodoro = Pomodoro.getInstance();
+		const response: boolean = await YesNoPrompt(`Did you finish the task?`);
+		if(response) {
+			pomodoro.tasks[pomodoro.currentTaskIndex].CompleteTask();
+			pomodoro._storage.save();
+		}
+		pomodoro.takeBreak();
+	}
+
 	private takeBreak(): void {
 		const pomodoro = Pomodoro.getInstance();		
 		// prompt user to assess the status of the task that was running
@@ -98,6 +108,7 @@ export class Pomodoro {
 			pomodoro._timer = new Timer(getConfig().long_break_duration, TimeUnits.Milliseconds);
 			pomodoro.breakCounter = 0;
 		}
+		pomodoro._statusBars.updateCurrentTask(`Break 💃🏻`);
 		pomodoro._timer.start(pomodoro.run);
 	}
 }
