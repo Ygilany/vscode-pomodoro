@@ -8,7 +8,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	pomodoro.preload();
 	
-	statusBars.updateTasksCounter(pomodoro.currentTaskIndex, pomodoro.tasks.length);
+	statusBars.updateTasksCounter(pomodoro.completedTasksCounter, pomodoro.tasks.length);
 
 	vscode.commands.registerCommand(`pomodoro.addTask`, () => pomodoro.addTask());
 	vscode.commands.registerCommand(`pomodoro.run`, () => pomodoro.run());	
