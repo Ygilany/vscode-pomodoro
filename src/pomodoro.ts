@@ -117,4 +117,16 @@ export class Pomodoro {
 		pomodoro._statusBars.updateCurrentTask(`Break 💃🏻`);
 		pomodoro._timer.start(pomodoro.run);
 	}
+
+	public clearCompleted(): void {
+		const pomodoro = Pomodoro.getInstance();
+		pomodoro.tasks = pomodoro.tasks.filter(function (task) {
+			return !task.isCompleted;
+		});
+
+		pomodoro.completedTasksCounter = 0;
+		pomodoro.currentTaskIndex = undefined;
+		pomodoro._storage.save();
+		pomodoro._statusBars.updateTasksCounter(pomodoro.completedTasksCounter, pomodoro.tasks.length)
+	}
 }
