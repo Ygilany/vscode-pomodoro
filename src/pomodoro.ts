@@ -106,7 +106,6 @@ export class Pomodoro {
 
 	private takeBreak(): void {
 		const pomodoro = Pomodoro.getInstance();		
-		// prompt user to assess the status of the task that was running
 		if (pomodoro.breakCounter < getConfig().counter_to_long_break) {
 			pomodoro._timer = new Timer(getConfig().break_duration, TimeUnits.Milliseconds);
 			pomodoro.breakCounter++;
