@@ -40,12 +40,12 @@ export class StatusBar {
     StatusBar.tasksCounterStatusBar.text = `(${currentTask}/${totalTasks})`
   }
 
-  public updateTimerBar(timerText) {
-    StatusBar.timerStatusBar.text = `$(watch) ${this.convertMS(timerText)}`
+  public updateTimerBar(milliseconds) {
+    StatusBar.timerStatusBar.text = `$(watch) ${this.convertMS(milliseconds)}`
   }
 
   public updateCurrentTask(name: string) {
-    StatusBar.taskStatusBar.text = `FOCUS: ${name}`
+    StatusBar.taskStatusBar.text = name
   }
 
 public convertMS(ms): string {
