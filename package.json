@@ -18,6 +18,36 @@
     ],
     "main": "./out/src/extension",
     "contributes": {
+        "configuration": {
+            "type": "object",
+            "title": "Pomodoro Configurations",
+            "properties": {
+                "pomodoro.task_duarion": {
+                    "type":"number",
+                    "default": 25,
+                    "description": "The default duration of a Pomodoro Task in minutes"
+                },
+                "pomodoro.break_duarion": {
+                    "type":"number",
+                    "default": 5,
+                    "description": "The default duration of a Break in minutes"
+                },
+                "pomodoro.long_break_duarion": {
+                    "type":"number",
+                    "default": 15,
+                    "description": "The default duration of a long Break in minutes"
+                },
+                "pomodoro.counter_to_long_break": {
+                    "type":"number",
+                    "default": 3,
+                    "description": "number of regular breaks before a long break"
+                },
+                "pomodoro.tasks_file": {
+                    "type":"string",
+                    "description": "full path to the tasks.json file"
+                }
+            }
+        },
         "commands": [
             {
                 "command": "pomodoro.addTask",
