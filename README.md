@@ -13,7 +13,7 @@ ext install vscode-pomodoro
 ```
 
 ## Usage
-![Usage](images/usage.gif)
+![Usage](./images/usage.gif)
 ### Add tasks
 First you'll need to add tasks to the extenstion to time-manage it for you.
  
