@@ -14,7 +14,7 @@
         "type": "git",
         "url": "https://github.com/Ygilany/vscode-pomodoro"
     },
-    "version": "1.0.1",
+    "version": "1.0.2",
     "publisher": "yahya-gilany",
     "engines": {
         "vscode": "^1.10.0"
