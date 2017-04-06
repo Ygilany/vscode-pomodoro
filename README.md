@@ -13,12 +13,11 @@ ext install vscode-pomodoro
 ```
 
 ## Usage
+![Usage](images/usage.gif)
 ### Add tasks
 First you'll need to add tasks to the extenstion to time-manage it for you.
  
 > ``` Pomodoro: Add New Task ```
-
-![Add Task](images/add.gif)
 
 ### Start The Pomodoro
 Simply by clicking on the Green Button next to the timer in the status bar, the pomodoro cycles start and you're good to go... 
