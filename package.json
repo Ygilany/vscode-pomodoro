@@ -10,6 +10,10 @@
     "bugs": {
         "url": "https://github.com/Ygilany/vscode-pomodoro/issues"
     },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Ygilany/vscode-pomodoro"
+    },
     "version": "1.0.1",
     "publisher": "yahya-gilany",
     "engines": {
