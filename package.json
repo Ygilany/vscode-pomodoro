@@ -1,7 +1,7 @@
 {
     "name": "vscode-pomodoro",
     "displayName": "vscode-pomodoro",
-    "icon": "./images/icon.png",
+    "icon": "images/icon.png",
     "description": "pomodoro for developers",
     "author": {
         "name": "Yahya Gilany",
