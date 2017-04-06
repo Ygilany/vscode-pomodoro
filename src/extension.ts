@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import { Pomodoro } from './pomodoro';
 import { StatusBar } from './ui';
 
-export function activate(context: vscode.ExtensionContext) {	
+export function activate(context: vscode.ExtensionContext) {
 	const pomodoro = Pomodoro.getInstance();
 	const statusBars = StatusBar.getInstance();
 
