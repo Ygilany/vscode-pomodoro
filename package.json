@@ -10,7 +10,7 @@
     "bugs": {
         "url": "https://github.com/Ygilany/vscode-pomodoro/issues"
     },
-    "version": "1.0.0",
+    "version": "1.0.1",
     "publisher": "yahya-gilany",
     "engines": {
         "vscode": "^1.10.0"
@@ -31,27 +31,27 @@
             "title": "Pomodoro Configurations",
             "properties": {
                 "pomodoro.task_duarion": {
-                    "type":"number",
+                    "type": "number",
                     "default": 25,
                     "description": "The default duration of a Pomodoro Task in minutes"
                 },
                 "pomodoro.break_duarion": {
-                    "type":"number",
+                    "type": "number",
                     "default": 5,
                     "description": "The default duration of a Break in minutes"
                 },
                 "pomodoro.long_break_duarion": {
-                    "type":"number",
+                    "type": "number",
                     "default": 15,
                     "description": "The default duration of a long Break in minutes"
                 },
                 "pomodoro.counter_to_long_break": {
-                    "type":"number",
+                    "type": "number",
                     "default": 3,
                     "description": "number of regular breaks before a long break"
                 },
                 "pomodoro.tasks_file": {
-                    "type":"string",
+                    "type": "string",
                     "description": "full path to the tasks.json file"
                 }
             }
@@ -60,10 +60,12 @@
             {
                 "command": "pomodoro.addTask",
                 "title": "Pomodoro: Add Task"
-            }, {
+            },
+            {
                 "command": "pomodoro.run",
                 "title": "Pomodoro: Run tasks"
-            }, {
+            },
+            {
                 "command": "pomodoro.clear",
                 "title": "Pomodoro: Clear Completed Tasks Counter"
             }
