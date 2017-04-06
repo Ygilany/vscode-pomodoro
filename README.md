@@ -1,65 +1,61 @@
-# vscode-pomodoro README
+# VSCode-Pomodoro
 
-This is the README for your extension "vscode-pomodoro". After writing up a brief description, we recommend including the following sections.
+Better Manage your time and be more effecient with your development work.
 
-## Features
+For more information about the Pomodoro Technique: [Visit this link](https://cirillocompany.de/pages/pomodoro-technique)
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
 
-For example if there is an image subfolder under your extension project workspace:
+## Installation
 
-\!\[feature X\]\(images/feature-x.png\)
+Press F1 in VSCode, type 
+```
+ext install vscode-pomodoro
+```
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## Usage
+### Add tasks
+First you'll need to add tasks to the extenstion to time-manage it for you.
+ 
+> ``` Pomodoro: Add New Task ```
 
-## Requirements
+![Add Task](images/add.gif)
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+### Start The Pomodoro
+Simply by clicking on the Green Button next to the timer in the status bar, the pomodoro cycles start and you're good to go... 
+
+The tasks added to the extension are oersisted throughout vscode windows.
+The counter in the status bar shows the number of completed tasks over the number of tasks.
+
+you many, sometime, start with a clean slate and reset the counter of the completed tasks.
+you can very easily do that with the following command:
+``` Pomodoro: Clear Completed Tasks```
+Dont't worry.. Tasks that hasn't been completed will remain intact.
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
 This extension contributes the following settings:
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+* `"pomodoro.task_duarion"`: The default duration of a Pomodoro Task in minutes
+* `"pomodoro.break_duarion"`: The default duration of a Break in minutes
+* `"pomodoro.long_break_duarion"`: The default duration of a long Break in minutes
+* `"pomodoro.counter_to_long_break"`: number of regular breaks before a long break
+* `"pomodoro.tasks_file"`: full path to the tasks.json file
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+Please Report any issue to the Git repository.
+
+The extension was only tested on macOS, some issues may arise on other Operating systems. 
+
+Please feel free to file new issues and submit pull requests to resolve any issue you may have.
+
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on OSX or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on OSX or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (OSX) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+please refer to the change log CHANGELOG.md
 
 **Enjoy!**
+
+## License
+
+MIT © Yahya Gilany
