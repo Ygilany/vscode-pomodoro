@@ -3,7 +3,14 @@
     "displayName": "vscode-pomodoro",
     "icon": "./images/icon.png",
     "description": "pomodoro for developers",
-    "version": "0.0.1",
+    "author": {
+        "name": "Yahya Gilany",
+        "email": "yahya.gilany@live.com"
+    },
+    "bugs": {
+        "url": "https://github.com/Ygilany/vscode-pomodoro/issues"
+    },
+    "version": "1.0.0",
     "publisher": "yahya-gilany",
     "engines": {
         "vscode": "^1.10.0"
