@@ -22,7 +22,7 @@ First you'll need to add tasks to the extenstion to time-manage it for you.
 ### Start The Pomodoro
 Simply by clicking on the Green Button next to the timer in the status bar, the pomodoro cycles start and you're good to go... 
 
-The tasks added to the extension are oersisted throughout vscode windows.
+The tasks added to the extension are persisted throughout vscode windows.
 The counter in the status bar shows the number of completed tasks over the number of tasks.
 
 you many, sometime, start with a clean slate and reset the counter of the completed tasks.
