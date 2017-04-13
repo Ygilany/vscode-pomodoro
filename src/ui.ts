@@ -15,8 +15,10 @@ export class StatusBar {
     StatusBar.startStatusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 4);
 
     StatusBar.timerStatusBar.text = `$(watch) 00:00`;
+
     StatusBar.taskStatusBar.text = `nothing is currently running`;
     StatusBar.tasksCounterStatusBar.text = `(0/0)`;
+
     StatusBar.startStatusBar.text = `$(triangle-right)`;
     StatusBar.startStatusBar.color = 'lightgreen';
     StatusBar.startStatusBar.tooltip = 'start';
@@ -48,18 +50,31 @@ export class StatusBar {
     StatusBar.taskStatusBar.text = name
   }
 
-public convertMS(ms): string {
-
-  function pad(number) {
-    return ('00' + number).slice(-2);
+  public updateStartBar(){
+    if(StatusBar.startStatusBar.text === `$(triangle-right)`) {
+      StatusBar.startStatusBar.text = `$(primitive-square)`;
+      StatusBar.startStatusBar.color = 'red';
+      StatusBar.startStatusBar.tooltip = 'pause';
+      StatusBar.startStatusBar.command = 'pomodoro.pause'
+    } else {
+      StatusBar.startStatusBar.text = `$(triangle-right)`;
+      StatusBar.startStatusBar.color = 'lightgreen';
+      StatusBar.startStatusBar.tooltip = 'start';
+      StatusBar.startStatusBar.command = 'pomodoro.run';
+    }
   }
-  var mins, secs;
-  secs = Math.floor(ms / 1000);
-  mins = Math.floor(secs / 60);
-  secs = secs % 60;
 
-  return  pad(mins) + ':' + pad(secs);
-};
+  public convertMS(ms): string {
+    function pad(number) {
+      return ('00' + number).slice(-2);
+    }
+    var mins, secs;
+    secs = Math.floor(ms / 1000);
+    mins = Math.floor(secs / 60);
+    secs = secs % 60;
+
+    return  pad(mins) + ':' + pad(secs);
+  };
 
   public dispose() {
     StatusBar.timerStatusBar.dispose();
