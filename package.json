@@ -26,7 +26,8 @@
         "*",
         "onCommand:pomodoro.addTask",
         "onCommand:pomodoro.run",
-        "onCommand:pomodoro.clear"
+        "onCommand:pomodoro.clear",
+        "onCommand:pomodoro.pause"
     ],
     "main": "./out/src/extension",
     "contributes": {
@@ -72,6 +73,14 @@
             {
                 "command": "pomodoro.clear",
                 "title": "Pomodoro: Clear Completed Tasks Counter"
+            },
+            {
+                "command": "pomodoro.pause",
+                "title": "Pomodoro: Pause Timer"
+            },
+            {
+                "command": "pomodoro.reset",
+                "title": "Reset Timer"
             }
         ]
     },
