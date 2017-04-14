@@ -79,8 +79,8 @@
                 "title": "Pomodoro: Pause Timer"
             },
             {
-                "command": "pomodoro.reset",
-                "title": "Reset Timer"
+                "command": "pomodoro.finishTask",
+                "title": "Pomodoro: Finished Task"
             }
         ]
     },
