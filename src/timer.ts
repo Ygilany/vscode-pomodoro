@@ -19,7 +19,6 @@ export class Timer {
 
   constructor(countdown: number = 0, unit:TimeUnits) {
     this.countdownMilliseconds = countdown * unit;
-
   }
 
   public start (next: Function) {
@@ -29,6 +28,7 @@ export class Timer {
       this._timer = setInterval(()=> {
         this.tick();
         statusBars.updateTimerBar(this.countdownMilliseconds);
+        
         if(this.countdownMilliseconds <= 0) {
           this.stop()
           next();
