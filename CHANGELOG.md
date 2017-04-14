@@ -5,6 +5,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 - added a pause functionality to the pomodoro
+- added the ability to finish a task early
 
 ## 1.0.1 - 1.0.2 - 1.0.3
 - documentation changes
