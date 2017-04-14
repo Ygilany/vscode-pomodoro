@@ -147,6 +147,7 @@ export class Pomodoro {
 	private finishTask(): void {
 		const pomodoro = Pomodoro.getInstance();
 		pomodoro.tasks[pomodoro.currentTaskIndex].CompleteTask();
+		pomodoro.completedTasksCounter ++;
 		pomodoro._statusBars.updateTasksCounter(pomodoro.completedTasksCounter, pomodoro.tasks.length)
 		pomodoro._storage.save();
 	}
