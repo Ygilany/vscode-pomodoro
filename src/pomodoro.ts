@@ -85,7 +85,16 @@ export class Pomodoro {
 		pomodoro.tasks[pomodoro.currentTaskIndex].PauseTask();
 		pomodoro._timer.stop();
 		pomodoro._statusBars.updateStartBar();
-		this._storage.save();		
+		pomodoro._storage.save();		
+	}
+
+	public stopTask() {
+		const pomodoro = Pomodoro.getInstance();
+		pomodoro._timer.reset();
+
+		pomodoro.finishTask();
+		pomodoro._storage.save();
+		pomodoro.takeBreak();
 	}
 
 	private pickTask(): void {
@@ -105,9 +114,7 @@ export class Pomodoro {
 		const pomodoro = Pomodoro.getInstance();
 		const response: boolean = await YesNoPrompt(`Did you finish the task?`);
 		if(response) {
-			pomodoro.tasks[pomodoro.currentTaskIndex].CompleteTask();
-			pomodoro._statusBars.updateTasksCounter(pomodoro.completedTasksCounter, pomodoro.tasks.length)
-			pomodoro._storage.save();
+			pomodoro.finishTask();
 		}
 		pomodoro.takeBreak();
 	}
@@ -135,5 +142,12 @@ export class Pomodoro {
 		pomodoro.currentTaskIndex = undefined;
 		pomodoro._storage.save();
 		pomodoro._statusBars.updateTasksCounter(pomodoro.completedTasksCounter, pomodoro.tasks.length)
+	}
+
+	private finishTask(): void {
+		const pomodoro = Pomodoro.getInstance();
+		pomodoro.tasks[pomodoro.currentTaskIndex].CompleteTask();
+		pomodoro._statusBars.updateTasksCounter(pomodoro.completedTasksCounter, pomodoro.tasks.length)
+		pomodoro._storage.save();
 	}
 }
