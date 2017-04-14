@@ -73,11 +73,19 @@ export class Pomodoro {
 			pomodoro._statusBars.updateCurrentTask(`Focus: `+pomodoro.tasks[pomodoro.currentTaskIndex].name)
 		
 			pomodoro._timer = pomodoro.tasks[pomodoro.currentTaskIndex].startTask(pomodoro.askAboutTaskCompletion);
+			pomodoro._statusBars.updateStartBar();
 			pomodoro._storage.save();	
 		} else {
 			return;
-		}
-			
+		}		
+	}
+
+	public pause() {
+		const pomodoro = Pomodoro.getInstance();
+		pomodoro.tasks[pomodoro.currentTaskIndex].PauseTask();
+		pomodoro._timer.stop();
+		pomodoro._statusBars.updateStartBar();
+		this._storage.save();		
 	}
 
 	private pickTask(): void {
