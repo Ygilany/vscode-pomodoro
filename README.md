@@ -1,5 +1,6 @@
 # VSCode-Pomodoro
-[![Github All Releases](https://img.shields.io/github/downloads/atom/atom/total.svg)](https://marketplace.visualstudio.com/items?itemName=yahya-gilany.vscode-pomodoro)
+[![Installs](https://vsmarketplacebadge.apphb.com/installs/yahya-gilany.vscode-terminal-launcher.svg
+)](https://marketplace.visualstudio.com/items?itemName=yahya-gilany.vscode-pomodoro)
 
 Better Manage your time and be more effecient with your development work.
 
