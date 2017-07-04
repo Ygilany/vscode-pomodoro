@@ -1,5 +1,5 @@
 # VSCode-Pomodoro
-[![Installs](https://vsmarketplacebadge.apphb.com/installs/yahya-gilany.vscode-terminal-launcher.svg
+[![Installs](http://vsmarketplacebadge.apphb.com/installs/yahya-gilany.vscode-pomodoro.svg
 )](https://marketplace.visualstudio.com/items?itemName=yahya-gilany.vscode-pomodoro)
 
 Better Manage your time and be more effecient with your development work.
